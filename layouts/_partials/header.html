@@ -144,3 +144,21 @@
     });
   });
 </script>
+
+<script>
+  (function () {
+    function setVH() {
+      document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
+    }
+    setVH();
+    // Only recompute on orientation change / real resize, not toolbar show/hide,
+    // which fires resize events too but shouldn't change layout.
+    let lastWidth = window.innerWidth;
+    window.addEventListener('resize', function () {
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        setVH();
+      }
+    });
+  })();
+</script>

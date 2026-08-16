@@ -13,7 +13,7 @@
 The best advice I got as a twenty-two-year-old came from my friend Esme&rsquo;s college professor, some guy I&rsquo;ve never met who teaches theatre at a college I wanted to go to but which did not admit me. The source is less relevant than the advice itself, which was this: you should live at home until it&rsquo;s holding you back, however long that takes. Esme had kindly offered me this piece of advice in response to my moaning about still living at home with my mother.">
 <meta name="author" content="Annie Sheneman">
 <link rel="canonical" href="http://localhost:1313/irreconcilable/posts/6.hometown/">
-<link crossorigin="anonymous" href="/irreconcilable/assets/css/stylesheet.95a1c42e2291be899d2a7d5bb785acabb03c47ecc615a7116a5c1b700f1aedf2.css" integrity="sha256-laHELiKRvomdKn1bt4Wsq7A8R&#43;zGFacRalwbcA8a7fI=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/irreconcilable/assets/css/stylesheet.8d2dddbcd47c6d7a5117d4cbc5ac87cc9b383bef1aeaad048b3257b2acfb1d51.css" integrity="sha256-jS3dvNR8bXpRF9TLxayHzJs4O&#43;8a6q0EizJXsqz7HVE=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/irreconcilable/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/irreconcilable/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/irreconcilable/favicon-32x32.png">
@@ -113,6 +113,24 @@ The best advice I got as a twenty-two-year-old came from my friend Esme&rsquo;s 
       }
     });
   });
+</script>
+
+<script>
+  (function () {
+    function setVH() {
+      document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
+    }
+    setVH();
+    
+    
+    let lastWidth = window.innerWidth;
+    window.addEventListener('resize', function () {
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        setVH();
+      }
+    });
+  })();
 </script><main class="main">
 
 <article class="post-single">

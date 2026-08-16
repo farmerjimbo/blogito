@@ -103,24 +103,22 @@ header.header {
 /* ==========================================================================
    BACKGROUND IMAGE (homepage + .bg-image pages + active-menu state)
    ========================================================================== */
-.bg-image,
-body:has(span.active) {
-  background-image: url('/irreconcilable/images/bbland.jpg') !important;
+body { position: relative; }
+
+.bg-image::after,
+body:has(span.active)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/irreconcilable/images/bbland.jpg');
   background-size: cover;
   background-position: 50% 10%;
-  background-attachment: fixed;
   background-repeat: no-repeat;
-}
-
-/* Touch devices (phones/tablets) get the resize bug from fixed backgrounds
-   recalculating against the browser's animating toolbar. Scroll attachment
-   ties the background to the page's own layout box instead, which doesn't
-   change size on scroll, so the image stays visually static. */
-@media (hover: none) and (pointer: coarse) {
-  .bg-image,
-  body:has(span.active) {
-    background-attachment: scroll;
-  }
+  z-index: -2;
+  pointer-events: none;
 }
 
 [data-theme="dark"] body:has(span.active)::before {
