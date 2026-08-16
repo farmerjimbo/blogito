@@ -119,12 +119,6 @@ body:has(span.active)::after {
   pointer-events: none;
 }
 
-/* remove background-image/background-attachment from the block above */
-.bg-image,
-body:has(span.active) {
-  /* no background-image here anymore */
-}
-
 [data-theme="dark"] body:has(span.active)::before {
   content: "";
   position: fixed;
