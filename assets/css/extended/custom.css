@@ -107,42 +107,24 @@ header.header {
   min-height: calc(100svh - var(--header-height) - var(--footer-height));
 }
 
-   .bg-image,
-body:has(span.active) {
-  background-image: url('/irreconcilable/images/bbland.jpg') !important;
+/* Background image for .bg-image pages (e.g. contributors) and any
+   page with an active nav item. Uses a dedicated ::after layer,
+   position:fixed, rather than background-attachment:fixed directly
+   on body — see the comment above .home-banner below for why. */
+.bg-image::after,
+body:has(span.active)::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: var(--vh-locked, 100svh);
+  background-image: url('/irreconcilable/images/bbland.jpg');
   background-size: cover;
   background-position: 50% 10%;
-  background-attachment: fixed;
   background-repeat: no-repeat;
-}
-
-
-/* Mobile fix: background-attachment:fixed calculates background-size:cover
-   against the live viewport, which mobile browsers resize on every
-   scroll as the address bar collapses/expands — producing a visible
-   "enlarging" glitch. The fix is to never use fixed attachment on
-   touch devices at all; instead let backgrounds size against a stable
-   box (home-banner) or simply scroll with the page (bg-image pages),
-   sacrificing the desktop parallax-pinned look only on mobile.
-   Two conditions target this for redundancy: (hover:none)/(pointer:
-   coarse) is the semantically correct touch-device check, but is
-   occasionally reported inconsistently across mobile browsers, so a
-   plain max-width query backs it up. */
-@media (hover: none) and (pointer: coarse), (max-width: 768px) {
-  .home-banner {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 100vw;
-    height: 100svh;
-    margin-left: -50vw;
-    background-attachment: scroll;
-  }
-
-  .bg-image,
-  body:has(span.active) {
-    background-attachment: scroll !important;
-  }
+  z-index: -1;
+  pointer-events: none;
 }
 
 [data-theme="dark"] body:has(span.active)::before {
@@ -518,16 +500,23 @@ code {
 /* ==========================================================================
    BANNERS / COVER IMAGES
    ========================================================================== */
+/* position:fixed alone gives the pinned/parallax look — deliberately
+   NOT using background-attachment:fixed as well, since that property
+   calculates background-size:cover against the live viewport, which
+   mobile browsers resize on every scroll as the address bar collapses/
+   expands, producing a visible "enlarging" glitch. Height uses a
+   JS-locked custom property (set on load/resize only, never on scroll)
+   so it stays stable through that address-bar animation; see the
+   script in header.html that sets --vh-locked. */
 .home-banner {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100svh;
+  height: var(--vh-locked, 100svh);
   background-image: url('/irreconcilable/images/bbland.jpg');
   background-size: cover;
   background-position: 50% 10%;
-  background-attachment: fixed;
   z-index: -1;
   margin: 0;
   padding: 0;
