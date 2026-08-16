@@ -117,15 +117,31 @@ body:has(span.active) {
 }
 
 
-@media (hover: none) and (pointer: coarse) {
+/* Mobile fix: background-attachment:fixed calculates background-size:cover
+   against the live viewport, which mobile browsers resize on every
+   scroll as the address bar collapses/expands — producing a visible
+   "enlarging" glitch. The fix is to never use fixed attachment on
+   touch devices at all; instead let backgrounds size against a stable
+   box (home-banner) or simply scroll with the page (bg-image pages),
+   sacrificing the desktop parallax-pinned look only on mobile.
+   Two conditions target this for redundancy: (hover:none)/(pointer:
+   coarse) is the semantically correct touch-device check, but is
+   occasionally reported inconsistently across mobile browsers, so a
+   plain max-width query backs it up. */
+@media (hover: none) and (pointer: coarse), (max-width: 768px) {
   .home-banner {
     position: absolute;
     top: 0;
     left: 50%;
     width: 100vw;
-    height: var(--vh-locked, 100svh);
+    height: 100svh;
     margin-left: -50vw;
     background-attachment: scroll;
+  }
+
+  .bg-image,
+  body:has(span.active) {
+    background-attachment: scroll !important;
   }
 }
 
