@@ -15,7 +15,7 @@ These teachers position themselves opposite the Original Religions whose profits
 ">
 <meta name="author" content="Ethan Miller">
 <link rel="canonical" href="http://localhost:1313/irreconcilable/posts/4.whiteknuckle/">
-<link crossorigin="anonymous" href="/irreconcilable/assets/css/stylesheet.2e30a921af3ab3afb647b6e734af70233202444ef9e1afcc916c07a990de4e8c.css" integrity="sha256-LjCpIa86s6&#43;2R7bnNK9wIzICRE754a/MkWwHqZDeTow=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/irreconcilable/assets/css/stylesheet.8a6ada3ad854fad5c4be624da8ac6e282e305acf7b25c402bd0b853c9d4876b9.css" integrity="sha256-imraOthU&#43;tXEvmJNqKxuKC4wWs97JcQCvQuFPJ1Idrk=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/irreconcilable/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/irreconcilable/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/irreconcilable/favicon-32x32.png">
@@ -71,12 +71,13 @@ These teachers position themselves opposite the Original Religions whose profits
         </div>
         <ul id="menu" class="menu">
             <li class="menu-dropdown">
-                <a href="http://localhost:1313/irreconcilable/" title="home">
-                    <span>home</span>
+                <a href="#"
+                    title="writing" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                    <span>writing</span>
                 </a>
                 <ul class="submenu">
                     <li><a href="/irreconcilable/posts/1.king/">the happiest man in the kingdom</a></li>
-                    <li><a href="/irreconcilable/posts/2.poems/">in the scalloped white morning I look for you</a></li>
+                    <li><a href="/irreconcilable/posts/2.poems/">in the scalloped white morning …</a></li>
                     <li><a href="/irreconcilable/posts/3.den/">the den of gifts</a></li>
                     <li><a href="/irreconcilable/posts/4.whiteknuckle/">white knuckle</a></li>
                     <li><a href="/irreconcilable/posts/5.prince/">a prince of cups</a></li>
@@ -86,13 +87,35 @@ These teachers position themselves opposite the Original Religions whose profits
                 </ul>
             </li>
             <li>
-                <a href="http://localhost:1313/irreconcilable/contributors/" title="contributors">
+                <a href="http://localhost:1313/irreconcilable/contributors/"
+                    title="contributors">
                     <span>contributors</span>
                 </a>
             </li>
         </ul>
     </nav>
-</header><main class="main">
+</header>
+
+<script>
+  document.querySelectorAll('.menu-dropdown > .dropdown-toggle').forEach(function (toggle) {
+    var parent = toggle.closest('.menu-dropdown');
+    toggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      var isOpen = parent.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+
+  document.addEventListener('click', function (e) {
+    document.querySelectorAll('.menu-dropdown.open').forEach(function (openMenu) {
+      if (!openMenu.contains(e.target)) {
+        openMenu.classList.remove('open');
+        var t = openMenu.querySelector('.dropdown-toggle');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+</script><main class="main">
 
 <article class="post-single">
   <header class="post-header">

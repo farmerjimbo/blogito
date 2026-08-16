@@ -103,13 +103,26 @@ header.header {
 /* ==========================================================================
    BACKGROUND IMAGE (homepage + .bg-image pages + active-menu state)
    ========================================================================== */
-.bg-image,
-body:has(span.active) {
-  background-image: url('/irreconcilable/images/bbland.jpg') !important;
+.bg-image::after,
+body:has(span.active)::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100svh;
+  background-image: url('/irreconcilable/images/bbland.jpg');
   background-size: cover;
   background-position: 50% 10%;
-  background-attachment: fixed;
   background-repeat: no-repeat;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* remove background-image/background-attachment from the block above */
+.bg-image,
+body:has(span.active) {
+  /* no background-image here anymore */
 }
 
 [data-theme="dark"] body:has(span.active)::before {
@@ -118,8 +131,8 @@ body:has(span.active) {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6) !important;
+  height: 100svh;
+  background-color: rgba(0, 0, 0, 0.7) !important;
   z-index: 0;
   pointer-events: none;
 }
@@ -190,12 +203,25 @@ body:has(span.active) .post-header {
 [data-theme="dark"] .logo a,
 [data-theme="dark"] .main .post-title,
 [data-theme="dark"] .post-header .post-title,
-[data-theme="dark"] h1.post-title,
-[data-theme="dark"] .cover-title-overlay {
+[data-theme="dark"] h1.post-title {
   color: var(--dark-mode-text) !important;
   text-shadow:
     1px 1px 0px rgba(37, 99, 235, 0.2),
     -1px -1px 0px rgba(96, 165, 250, 0.15);
+}
+
+/* Cream in both light and dark mode (the inline <style> block baked
+   into each page sets this to white by default, hence !important). */
+.cover-title-overlay {
+  color: var(--dark-mode-text) !important;
+}
+
+/* Lighten the h1 title below the banner image (the overlay on the
+   banner itself is left untouched). */
+.post-header .post-title,
+h1.post-title {
+  font-weight: 500;
+  font-size: 2em;
 }
 
 [data-theme="dark"] .post-entry h2,
@@ -224,7 +250,7 @@ body:has(span.active) .post-header {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100svh;
   pointer-events: none;
   z-index: 0;
   background: repeating-linear-gradient(
@@ -339,7 +365,8 @@ a:not(#theme-toggle):not(.theme-toggle):hover {
 }
 
 .menu-dropdown:hover .submenu,
-.menu-dropdown:focus-within .submenu {
+.menu-dropdown:focus-within .submenu,
+.menu-dropdown.open .submenu {
   display: block;
 }
 
@@ -396,6 +423,12 @@ a:not(#theme-toggle):not(.theme-toggle):hover {
 .post-entry .entry-title a {
   border-bottom: none !important;
 }
+
+.post-entry h2 a:hover,
+.post-entry .entry-title a:hover {
+  border-bottom: 1px solid var(--primary) !important;
+}
+
 
 /* Match post-entry title size/font to project-intro's body text.
    Using an explicit px value rather than em, since the title's parent
@@ -470,7 +503,7 @@ code {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
   background-image: url('/irreconcilable/images/bbland.jpg');
   background-size: cover;
   background-position: 50% 10%;
@@ -530,7 +563,7 @@ code {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   pointer-events: none;
 }
 

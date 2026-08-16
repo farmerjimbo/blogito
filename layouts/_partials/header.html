@@ -90,10 +90,12 @@
             {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
             {{- $page_url:= $currentPage.Permalink | absLangURL }}
             {{- $is_search := eq (site.GetPage .KeyName).Layout `search` }}
-            {{- $is_home := eq (.Name | lower) "home" }}
-            <li{{ if $is_home }} class="menu-dropdown"{{ end }}>
-                <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }} {{- cond $is_search (" (Alt + /)" | safeHTMLAttr) ("" | safeHTMLAttr ) }}"
-                {{- cond $is_search (" accesskey=/" | safeHTMLAttr) ("" | safeHTMLAttr ) }}>
+            {{- $is_writing := eq (.Name | lower) "writing" }}
+            <li{{ if $is_writing }} class="menu-dropdown"{{ end }}>
+                <a href="{{ if $is_writing }}#{{ else }}{{ .URL | absLangURL }}{{ end }}"
+                    title="{{ .Title | default .Name }} {{- cond $is_search (" (Alt + /)" | safeHTMLAttr) ("" | safeHTMLAttr ) }}"
+                    {{- cond $is_search (" accesskey=/" | safeHTMLAttr) ("" | safeHTMLAttr ) }}
+                    {{- if $is_writing }} class="dropdown-toggle" aria-haspopup="true" aria-expanded="false"{{ end }}>
                     <span {{- if eq $menu_item_url $page_url }} class="active" {{- end }}>
                         {{- .Pre }}
                         {{- .Name -}}
@@ -108,12 +110,12 @@
                     </svg>
                     {{- end }}
                 </a>
-                {{- if $is_home }}
+                {{- if $is_writing }}
                 <ul class="submenu">
                     {{- $posts := where site.RegularPages "Type" "in" site.Params.mainSections }}
                     {{- range $posts }}
-<li><a href="{{ .RelPermalink }}">{{ if gt (len .Title) 31 }}{{ printf "%.31s" .Title }}…{{ else }}{{ .Title }}{{ end }}</a></li>
-{{- end }}
+                    <li><a href="{{ .RelPermalink }}">{{ if gt (len .Title) 31 }}{{ printf "%.31s" .Title }}…{{ else }}{{ .Title }}{{ end }}</a></li>
+                    {{- end }}
                 </ul>
                 {{- end }}
             </li>
@@ -121,3 +123,24 @@
         </ul>
     </nav>
 </header>
+
+<script>
+  document.querySelectorAll('.menu-dropdown > .dropdown-toggle').forEach(function (toggle) {
+    var parent = toggle.closest('.menu-dropdown');
+    toggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      var isOpen = parent.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+
+  document.addEventListener('click', function (e) {
+    document.querySelectorAll('.menu-dropdown.open').forEach(function (openMenu) {
+      if (!openMenu.contains(e.target)) {
+        openMenu.classList.remove('open');
+        var t = openMenu.querySelector('.dropdown-toggle');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+</script>

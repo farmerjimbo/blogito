@@ -10,7 +10,7 @@
 <meta name="description" content="a writing project about the gaps between">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/irreconcilable/404.html">
-<link crossorigin="anonymous" href="/irreconcilable/assets/css/stylesheet.d1e1cce9734ec9d16aead500f9bd92f06e91a13c58b8e441827d82e4185f617f.css" integrity="sha256-0eHM6XNOydFq6tUA&#43;b2S8G6RoTxYuORBgn2C5BhfYX8=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/irreconcilable/assets/css/stylesheet.8a6ada3ad854fad5c4be624da8ac6e282e305acf7b25c402bd0b853c9d4876b9.css" integrity="sha256-imraOthU&#43;tXEvmJNqKxuKC4wWs97JcQCvQuFPJ1Idrk=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/irreconcilable/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/irreconcilable/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/irreconcilable/favicon-32x32.png">
@@ -66,28 +66,51 @@
         </div>
         <ul id="menu" class="menu">
             <li class="menu-dropdown">
-                <a href="http://localhost:1313/irreconcilable/" title="home">
-                    <span>home</span>
+                <a href="#"
+                    title="writing" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                    <span>writing</span>
                 </a>
                 <ul class="submenu">
-<li><a href="/irreconcilable/posts/1.king/">the happiest man in the kingdom</a></li>
-<li><a href="/irreconcilable/posts/2.poems/">in the scalloped white morning …</a></li>
-<li><a href="/irreconcilable/posts/3.den/">the den of gifts</a></li>
-<li><a href="/irreconcilable/posts/4.whiteknuckle/">white knuckle</a></li>
-<li><a href="/irreconcilable/posts/5.prince/">a prince of cups</a></li>
-<li><a href="/irreconcilable/posts/6.hometown/">hometown</a></li>
-<li><a href="/irreconcilable/posts/7.crickets/">crickets</a></li>
-<li><a href="/irreconcilable/posts/8.rapture/">rapture</a></li>
+                    <li><a href="/irreconcilable/posts/1.king/">the happiest man in the kingdom</a></li>
+                    <li><a href="/irreconcilable/posts/2.poems/">in the scalloped white morning …</a></li>
+                    <li><a href="/irreconcilable/posts/3.den/">the den of gifts</a></li>
+                    <li><a href="/irreconcilable/posts/4.whiteknuckle/">white knuckle</a></li>
+                    <li><a href="/irreconcilable/posts/5.prince/">a prince of cups</a></li>
+                    <li><a href="/irreconcilable/posts/6.hometown/">hometown</a></li>
+                    <li><a href="/irreconcilable/posts/7.crickets/">crickets</a></li>
+                    <li><a href="/irreconcilable/posts/8.rapture/">rapture</a></li>
                 </ul>
             </li>
             <li>
-                <a href="http://localhost:1313/irreconcilable/contributors/" title="contributors">
+                <a href="http://localhost:1313/irreconcilable/contributors/"
+                    title="contributors">
                     <span>contributors</span>
                 </a>
             </li>
         </ul>
     </nav>
-</header><main class="main">
+</header>
+
+<script>
+  document.querySelectorAll('.menu-dropdown > .dropdown-toggle').forEach(function (toggle) {
+    var parent = toggle.closest('.menu-dropdown');
+    toggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      var isOpen = parent.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+
+  document.addEventListener('click', function (e) {
+    document.querySelectorAll('.menu-dropdown.open').forEach(function (openMenu) {
+      if (!openMenu.contains(e.target)) {
+        openMenu.classList.remove('open');
+        var t = openMenu.querySelector('.dropdown-toggle');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+</script><main class="main">
 <div class="not-found">404</div>
     </main>
     
