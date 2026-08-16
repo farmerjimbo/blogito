@@ -6,13 +6,16 @@
 
 {{ .Content }}
 
+{{ $intro := site.GetPage "project-intro" }}
+<div class="project-intro">{{ $intro.Content }}</div>
+
 {{ $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
 {{ $paginator := .Paginate $pages }}
 
 {{ range $paginator.Pages }}
 <article class="post-entry">
   <header class="entry-header">
-    <h2>
+    <h2{{ with .Params.author }} data-author="{{ . }}"{{ end }}>
       <a href="{{ .RelPermalink }}">{{ .Title }}</a>
     </h2>
   </header>

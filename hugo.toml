@@ -5,14 +5,14 @@ theme = "PaperMod"
 
 [params]
   description = "a writing project about the gaps between"
-  author = "James Cody Phelan"
-  
+  author = ""
   defaultTheme = "dark"  # Changed to light since your CSS defaults to light
   ShowReadingTime = false  # You hid this anyway
   ShowShareButtons = false  # You hid this anyway
-  ShowPostNavLinks = false
+  ShowPostNavLinks = true
   ShowBreadCrumbs = false  # You hid this anyway
   ShowCodeCopyButtons = true
+  
 
   [params.homeInfoParams]
     Title = "irreconcilable"
@@ -20,11 +20,14 @@ theme = "PaperMod"
 
 [menu]
   [[menu.main]]
-    name = "home"
-    url = "/"
-    weight = 10
+  name = "home"
+  url = "/"
+  weight = 10
   
-  [[menu.main]]
-    name = "the project"
-    url = "/the-project/"
-    weight = 20
+ [[menu.main]]
+  name = "contributors"
+  url = "/contributors/"
+  weight = 20
+
+    [markup.goldmark.renderer]
+unsafe = true
