@@ -103,22 +103,30 @@ header.header {
 /* ==========================================================================
    BACKGROUND IMAGE (homepage + .bg-image pages + active-menu state)
    ========================================================================== */
-body { position: relative; }
+.main {
+  min-height: calc(100svh - var(--header-height) - var(--footer-height));
+}
 
-.bg-image::after,
-body:has(span.active)::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url('/irreconcilable/images/bbland.jpg');
+   .bg-image,
+body:has(span.active) {
+  background-image: url('/irreconcilable/images/bbland.jpg') !important;
   background-size: cover;
   background-position: 50% 10%;
+  background-attachment: fixed;
   background-repeat: no-repeat;
-  z-index: -2;
-  pointer-events: none;
+}
+
+
+@media (hover: none) and (pointer: coarse) {
+  .home-banner {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    height: var(--vh-locked, 100svh);
+    margin-left: -50vw;
+    background-attachment: scroll;
+  }
 }
 
 [data-theme="dark"] body:has(span.active)::before {

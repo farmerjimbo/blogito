@@ -17,6 +17,19 @@
 </head>
 
 {{- if (or (ne .Kind `page` ) (eq .Layout `archives`) (eq .Layout `search`)) }}
+
+<script>
+(function () {
+  function lockVH() {
+    document.documentElement.style.setProperty('--vh-locked', window.innerHeight + 'px');
+  }
+  lockVH();
+  var w = window.innerWidth;
+  window.addEventListener('resize', function () {
+    if (window.innerWidth !== w) { w = window.innerWidth; lockVH(); } // ignore toolbar-only resizes
+  });
+})();
+</script>
 <body class="list{{ with .Param "class" }} {{ . }}{{ end }}" id="top">
 {{- else }}
 <body{{ with .Param "class" }} class="{{ . }}"{{ end }} id="top">
